@@ -1143,6 +1143,7 @@ html {
   font-size: 0.95rem;
   font-weight: 600;
   line-height: 1.5;
+  padding-top: 0.15rem;
 }
 .research-content {
   flex: 1 1 auto;
