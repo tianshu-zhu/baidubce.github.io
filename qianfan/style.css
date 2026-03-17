@@ -1116,19 +1116,16 @@ html {
 .index-table th { font-weight: 700; background: #f8f9fa; }
 .index-table a { color: #0056d6; text-decoration: none; }
 .index-table a:hover { text-decoration: underline; }
-.index-table-wrapper { background: #fff; border: 1px solid #e5e7eb; padding: 0; }
-.refined-index-table { border: 0; }
-.refined-index-table th, .refined-index-table td { padding: 1.35rem 1rem; }
-.refined-index-table th { background: #fff; color: var(--text-secondary); font-weight: 600; border-bottom: 1px solid #eceff3; }
-.refined-index-table tr:last-child td { border-bottom: 0; }
-.refined-index-table td:first-child { width: 22%; font-weight: 600; }
-.refined-index-table td:nth-child(2) { width: 44%; color: var(--text-secondary); }
-.refined-index-table td:nth-child(3) { width: 34%; }
-.compact-index-table td:first-child { width: 68%; }
-.compact-index-table td:nth-child(2) { width: 32%; color: var(--text-primary); }
-.entry-date { color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 0.65rem; }
-.entry-title { font-size: 1.5rem; font-weight: 600; margin-bottom: 0.4rem; color: var(--text-primary); }
-.entry-desc { color: var(--text-secondary); font-size: 1rem; line-height: 1.6; }
+.research-feed { background: #fff; }
+.research-row { display: grid; grid-template-columns: 180px minmax(0, 1fr); gap: 2rem; padding: 2rem 0; border-bottom: 1px solid #e5e7eb; }
+.research-row:first-child { border-top: 1px solid #e5e7eb; }
+.research-date { color: var(--text-secondary); font-size: 0.95rem; font-weight: 600; }
+.research-content { min-width: 0; }
+.entry-title { font-size: 1.5rem; font-weight: 600; margin-bottom: 0.45rem; color: var(--text-primary); }
+.entry-desc { color: var(--text-secondary); font-size: 1rem; line-height: 1.6; margin-bottom: 0.5rem; }
+.entry-links { line-height: 1.7; }
+.entry-links a { color: #0056d6; text-decoration: none; }
+.entry-links a:hover { text-decoration: underline; }
 .language-switch { margin-top: 1rem; font-size: 0.95rem; color: var(--text-secondary); }
 .language-switch a { color: var(--text-primary); text-decoration: none; }
 .language-switch a:hover { opacity: .7; }
@@ -1154,5 +1151,6 @@ html {
   .container { padding: 0 1rem; }
   .hero-title { font-size: 1.6rem; }
   .article { padding: 1.25rem; }
-  .index-table th, .index-table td { padding: .75rem; }
+  .research-row { grid-template-columns: 1fr; gap: 0.5rem; padding: 1.5rem 0; }
+  .research-date { margin-bottom: 0.15rem; }
 }
