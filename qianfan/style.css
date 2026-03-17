@@ -81,9 +81,7 @@ body {
 .hero-section {
     padding: 3rem 0;
     margin-bottom: 3rem;
-    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-    border-radius: 16px;
-    text-align: center;
+    text-align: left;
 }
 
 .hero-title {
@@ -107,13 +105,68 @@ body {
 /* Sections */
 .section {
     margin-bottom: 4rem;
-    padding: 2rem 0;
-    background: #fafbfc;
-    margin-left: -2rem;
-    margin-right: -2rem;
-    padding-left: 2rem;
-    padding-right: 2rem;
-    border-radius: 0;
+    padding: 0;
+    background: transparent;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.research-list {
+    border-top: 1px solid var(--border-light);
+}
+
+.research-item {
+    display: grid;
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+    gap: 2rem;
+    padding: 1.75rem 0;
+    border-bottom: 1px solid var(--border-light);
+    align-items: start;
+}
+
+.research-item-title {
+    margin: 0 0 0.5rem;
+    padding: 0;
+    border: 0;
+    font-size: 1.75rem;
+    font-weight: 600;
+}
+
+.research-item-title::after {
+    display: none;
+}
+
+.research-item-desc {
+    margin: 0;
+    color: var(--text-secondary);
+}
+
+.research-item-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.research-item-links a {
+    color: var(--text-primary);
+    text-decoration: none;
+}
+
+.research-item-links a:hover {
+    text-decoration: underline;
+}
+
+.link-sep {
+    color: var(--text-secondary);
+}
+
+@media (max-width: 768px) {
+    .research-item {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+    }
 }
 
 
