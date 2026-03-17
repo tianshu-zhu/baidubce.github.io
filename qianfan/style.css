@@ -145,6 +145,22 @@ body {
     padding-right: 0;
 }
 
+.table-of-contents.section > div > h2 {
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid #e9ecef;
+    position: relative;
+}
+
+.table-of-contents.section > div > h2::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 60px;
+    height: 2px;
+    background: #007bff;
+}
+
 .section h3 {
     font-size: 1.25rem;
     font-weight: 600;
