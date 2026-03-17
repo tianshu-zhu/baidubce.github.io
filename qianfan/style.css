@@ -137,6 +137,14 @@ body {
     background: #007bff;
 }
 
+.research-section {
+    background: transparent;
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 0;
+    padding-right: 0;
+}
+
 .section h3 {
     font-size: 1.25rem;
     font-weight: 600;
@@ -1117,7 +1125,7 @@ html {
 .index-table a { color: #0056d6; text-decoration: none; }
 .index-table a:hover { text-decoration: underline; }
 .research-feed {
-  max-width: 980px;
+  max-width: 900px;
   margin: 0 auto;
   background: transparent;
 }
