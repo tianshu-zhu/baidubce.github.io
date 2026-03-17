@@ -1158,7 +1158,7 @@ html {
 .article :not(pre) > code { background: #f2f4f7; padding: .1rem .35rem; border-radius: 4px; }
 .article table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
 .article th, .article td { border: 1px solid #d9d9d9; padding: .65rem .8rem; }
-.article img { max-width: 100%; height: auto; }
+.article img { max-width: 100%; height: auto; cursor: zoom-in; }
 .article .hero-note { color: var(--text-secondary); margin-bottom: 1.5rem; }
 .article .back-link { margin-bottom: 1.5rem; display: inline-block; color: #0056d6; text-decoration: none; }
 .article .back-link:hover { text-decoration: underline; }
