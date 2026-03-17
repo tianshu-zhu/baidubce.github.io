@@ -19,7 +19,9 @@
   <div class="language-switch"><a href="index_zh.html">中文</a> | English</div>
 </section>
 <section class="section">
-  <div class="article">
+  <div class="article-layout">
+    <aside class="article-toc" id="article-toc"></aside>
+    <div class="article">
     <a class="back-link" href="../index_en.html">← Back to Qianfan Research</a>
 <h2>TL;DR</h2>
 <div style="display: flex; gap: 16px; align-items: flex-start;">
@@ -442,6 +444,7 @@ So the training target is not just “nonzero rollout pass rate,” but “maxim
 </code></pre>
 <p>🫡 We appreciate you reading. We’re continuing to improve this work and would love to hear your feedback.</p>
   </div>
+  </div>
 </section>
 <div class="image-modal" id="image-modal">
   <span class="image-modal-close" id="image-modal-close">&times;</span>
@@ -459,6 +462,45 @@ So the training target is not just “nonzero rollout pass rate,” but “maxim
       const modalImage = document.getElementById('image-modal-img');
       const closeButton = document.getElementById('image-modal-close');
       const article = document.querySelector('.article');
+      const tocContainer = document.getElementById('article-toc');
+
+      const slugify = (text, fallback) => {
+        const base = text
+          .toLowerCase()
+          .replace(/[^a-z0-9\u4e00-\u9fa5\s-]/g, '')
+          .trim()
+          .replace(/\s+/g, '-');
+        return base || fallback;
+      };
+
+      const headings = Array.from(article.querySelectorAll('h2, h3, h4'));
+      if (headings.length > 0 && tocContainer) {
+        const title = document.createElement('div');
+        title.className = 'article-toc-title';
+        title.textContent = 'Contents';
+
+        const list = document.createElement('ul');
+        list.className = 'article-toc-list';
+
+        headings.forEach((heading, index) => {
+          if (!heading.id) {
+            heading.id = slugify(heading.textContent, `section-${index + 1}`);
+          }
+
+          const item = document.createElement('li');
+          item.className = `toc-level-${heading.tagName.toLowerCase()}`;
+
+          const link = document.createElement('a');
+          link.href = `#${heading.id}`;
+          link.textContent = heading.textContent;
+
+          item.appendChild(link);
+          list.appendChild(item);
+        });
+
+        tocContainer.appendChild(title);
+        tocContainer.appendChild(list);
+      }
 
       article.addEventListener('click', (event) => {
         const image = event.target.closest('img');
