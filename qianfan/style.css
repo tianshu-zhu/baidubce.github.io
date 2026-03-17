@@ -1158,16 +1158,18 @@ html {
 .language-switch a { color: var(--text-primary); text-decoration: none; }
 .language-switch a:hover { opacity: .7; }
 .toc-inline-section {
-  background: #f8f9fa;
-  padding: 1.5rem;
-  border-radius: 8px;
   margin: 1.5rem 0;
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
 }
 .toc-inline-card h2 {
   font-size: 1.3rem;
   margin-bottom: 1rem;
+  margin-top: 0;
   border-bottom: none;
   padding-bottom: 0;
+  color: var(--text-primary);
 }
 .toc-inline-card h2::after { display: none; }
 .toc-inline-card {
@@ -1198,7 +1200,7 @@ html {
 @media (max-width: 768px) {
   .container { padding: 0 1rem; }
   .hero-title { font-size: 1.6rem; }
-  .toc-inline-section { padding: 1rem; }
+  .toc-inline-card { padding: 1rem; }
   .toc-column { min-width: 100%; }
   .article { padding: 1.25rem; }
   .research-row { display: block !important; padding: 1.5rem 0; }
