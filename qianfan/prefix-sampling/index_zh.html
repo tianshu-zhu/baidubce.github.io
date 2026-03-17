@@ -25,8 +25,7 @@
   </div>
 </section>
 <section class="section">
-  <div class="article-layout article-layout-single">
-    <div class="article">
+  <div class="article">
     <a class="back-link" href="../index.html">← 返回 Qianfan Research</a>
 <h2>TL;DR</h2>
 <div style="display: flex; gap: 16px; margin-bottom: 12px;">
@@ -453,7 +452,6 @@ d²[p(1-p)]/dp² = -2 &lt; 0  (confirmed maximum)
 </code></pre>
 <p>🫡 感谢你读到这里。我们还在持续打磨这项工作，也非常欢迎你的反馈。</p>
   </div>
-  </div>
 </section>
 <div class="image-modal" id="image-modal">
   <span class="image-modal-close" id="image-modal-close">&times;</span>
@@ -484,31 +482,34 @@ d²[p(1-p)]/dp² = -2 &lt; 0  (confirmed maximum)
 
       const headings = Array.from(article.querySelectorAll('h2, h3, h4'));
       if (headings.length > 0 && tocContainer) {
-        const title = document.createElement('div');
-        title.className = 'article-toc-title';
-        title.textContent = 'Table of Contents';
+        const grid = document.createElement('div');
+        grid.className = 'article-toc-grid';
 
-        const list = document.createElement('ul');
-        list.className = 'article-toc-list';
+        const columns = [document.createElement('div'), document.createElement('div')];
+        columns.forEach((column) => {
+          column.className = 'toc-column';
+          grid.appendChild(column);
+        });
+
+        const splitIndex = Math.ceil(headings.length / 2);
 
         headings.forEach((heading, index) => {
           if (!heading.id) {
             heading.id = slugify(heading.textContent, `section-${index + 1}`);
           }
 
-          const item = document.createElement('li');
-          item.className = `toc-level-${heading.tagName.toLowerCase()}`;
+          const item = document.createElement('div');
+          item.className = `toc-item toc-level-${heading.tagName.toLowerCase()}`;
 
           const link = document.createElement('a');
           link.href = `#${heading.id}`;
           link.textContent = heading.textContent;
 
           item.appendChild(link);
-          list.appendChild(item);
+          columns[index < splitIndex ? 0 : 1].appendChild(item);
         });
 
-        tocContainer.appendChild(title);
-        tocContainer.appendChild(list);
+        tocContainer.appendChild(grid);
       }
 
       article.addEventListener('click', (event) => {
