@@ -458,17 +458,20 @@ So the training target is not just “nonzero rollout pass rate,” but “maxim
       const modal = document.getElementById('image-modal');
       const modalImage = document.getElementById('image-modal-img');
       const closeButton = document.getElementById('image-modal-close');
-      const zoomableImages = document.querySelectorAll('.zoomable-image');
+      const article = document.querySelector('.article');
 
-      zoomableImages.forEach((link) => {
-        link.addEventListener('click', (event) => {
-          event.preventDefault();
-          const image = link.querySelector('img');
-          const fullImageUrl = link.getAttribute('href') || image.src;
-          modalImage.src = fullImageUrl;
-          modalImage.alt = image.alt || 'Enlarged image';
-          modal.style.display = 'block';
-        });
+      article.addEventListener('click', (event) => {
+        const image = event.target.closest('img');
+        if (!image || !article.contains(image)) {
+          return;
+        }
+
+        event.preventDefault();
+        const imageLink = image.closest('a');
+        const fullImageUrl = imageLink?.getAttribute('href') || image.src;
+        modalImage.src = fullImageUrl;
+        modalImage.alt = image.alt || 'Enlarged image';
+        modal.style.display = 'block';
       });
 
       closeButton.addEventListener('click', () => {
