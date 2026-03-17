@@ -482,31 +482,103 @@ d²[p(1-p)]/dp² = -2 &lt; 0  (confirmed maximum)
 
       const headings = Array.from(article.querySelectorAll('h2, h3, h4'));
       if (headings.length > 0 && tocContainer) {
-        const grid = document.createElement('div');
-        grid.className = 'article-toc-grid';
-
-        const columns = [document.createElement('div'), document.createElement('div')];
-        columns.forEach((column) => {
-          column.className = 'toc-column';
-          grid.appendChild(column);
-        });
-
-        const splitIndex = Math.ceil(headings.length / 2);
-
-        headings.forEach((heading, index) => {
+        const ensureId = (heading, index) => {
           if (!heading.id) {
             heading.id = slugify(heading.textContent, `section-${index + 1}`);
           }
+        };
 
-          const item = document.createElement('div');
-          item.className = `toc-item toc-level-${heading.tagName.toLowerCase()}`;
+        const groups = [];
+        let currentH2 = null;
+        let currentH3Block = null;
 
+        headings.forEach((heading, index) => {
+          ensureId(heading, index);
+          const level = heading.tagName.toLowerCase();
+
+          if (level === 'h2') {
+            currentH2 = { heading, children: [] };
+            groups.push(currentH2);
+            currentH3Block = null;
+            return;
+          }
+
+          if (!currentH2) {
+            currentH2 = { heading, children: [] };
+            groups.push(currentH2);
+          }
+
+          if (level === 'h3') {
+            currentH3Block = { heading, children: [] };
+            currentH2.children.push(currentH3Block);
+            return;
+          }
+
+          if (!currentH3Block) {
+            currentH3Block = { heading: null, children: [] };
+            currentH2.children.push(currentH3Block);
+          }
+          currentH3Block.children.push(heading);
+        });
+
+        const grid = document.createElement('div');
+        grid.style.cssText = 'display: flex; flex-wrap: wrap; gap: 2rem; font-size: 0.9rem; line-height: 1.6;';
+
+        const columns = [document.createElement('div'), document.createElement('div')];
+        columns.forEach((column) => {
+          column.style.cssText = 'flex: 1; min-width: 280px;';
+          grid.appendChild(column);
+        });
+
+        const splitIndex = Math.ceil(groups.length / 2);
+
+        const buildLink = (heading, style) => {
           const link = document.createElement('a');
           link.href = `#${heading.id}`;
           link.textContent = heading.textContent;
+          link.style.cssText = style;
+          return link;
+        };
 
-          item.appendChild(link);
-          columns[index < splitIndex ? 0 : 1].appendChild(item);
+        groups.forEach((group, index) => {
+          const column = columns[index < splitIndex ? 0 : 1];
+          const block = document.createElement('div');
+          block.style.cssText = 'margin-bottom: 0.8rem;';
+
+          const strong = document.createElement('strong');
+          strong.appendChild(buildLink(group.heading, 'color: var(--text-primary); text-decoration: none;'));
+          block.appendChild(strong);
+
+          if (group.children.length > 0) {
+            const childWrap = document.createElement('div');
+            childWrap.style.cssText = 'margin-left: 1rem; margin-top: 0.3rem; color: #666;';
+
+            group.children.forEach((child) => {
+              if (child.heading) {
+                childWrap.appendChild(buildLink(child.heading, 'color: inherit; text-decoration: none;'));
+                childWrap.appendChild(document.createElement('br'));
+              }
+
+              if (child.children && child.children.length > 0) {
+                const grandWrap = document.createElement('div');
+                grandWrap.style.cssText = 'margin-left: 1rem; font-size: 0.85rem;';
+                child.children.forEach((grand) => {
+                  const grandLink = buildLink(grand, 'color: inherit; text-decoration: none;');
+                  grandLink.textContent = `• ${grand.textContent}`;
+                  grandWrap.appendChild(grandLink);
+                  grandWrap.appendChild(document.createElement('br'));
+                });
+                childWrap.appendChild(grandWrap);
+              }
+            });
+
+            while (childWrap.lastChild && childWrap.lastChild.tagName === 'BR') {
+              childWrap.removeChild(childWrap.lastChild);
+            }
+            block.appendChild(childWrap);
+          }
+
+          column.appendChild(block);
         });
 
         tocContainer.appendChild(grid);
