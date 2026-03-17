@@ -22,8 +22,8 @@
     <a class="back-link" href="../index_en.html">← Back to Qianfan Research</a>
 <h2>TL;DR</h2>
 <div style="display: flex; gap: 16px; align-items: flex-start;">
-  <img src="figures/qwen3_14b_ps_vs_baseline_1to1_repro_v2.png" style="width: 50%;" alt="Qwen3-14B SWE-bench Verified Comparison">
-  <img src="figures/qwen3_32b_ps_vs_baseline_1to1_repro_max_table6.png" style="width: 50%;" alt="Qwen3-32B SWE-bench Verified Comparison">
+  <a class="zoomable-image" href="figures/qwen3_14b_ps_vs_baseline_1to1_repro_v2.png"><img src="figures/qwen3_14b_ps_vs_baseline_1to1_repro_v2.png" alt="Enlarged image"></a><img src="figures/qwen3_14b_ps_vs_baseline_1to1_repro_v2.png" style="width: 50%;" alt="Qwen3-14B SWE-bench Verified Comparison"></a>
+  <a class="zoomable-image" href="figures/qwen3_32b_ps_vs_baseline_1to1_repro_max_table6.png"><img src="figures/qwen3_32b_ps_vs_baseline_1to1_repro_max_table6.png" alt="Enlarged image"></a><img src="figures/qwen3_32b_ps_vs_baseline_1to1_repro_max_table6.png" style="width: 50%;" alt="Qwen3-32B SWE-bench Verified Comparison"></a>
 </div>
 
 <p><em>Figure 1. Left: Qwen3-14B SWE-bench Verified pass@1 score over training steps, averaged over 3 runs. PS reaches the baseline's peak score 1.8x faster and ultimately reaches 0.298 vs 0.273. Right: Qwen3-32B SWE-bench Verified pass@1 score over training steps, averaged over 3 runs. PS reaches the baseline's best score of 0.422 at step 290, while baseline reaches the same score at step 410.</em></p>
@@ -271,12 +271,12 @@ target_step = total_steps - remaining
 </table>
 <h3>Training Efficiency: Faster Convergence and Lower Cost</h3>
 <div style="display: flex; gap: 16px; margin-bottom: 12px;">
-  <img src="figures/pass_rate_comparison.png" style="width: 50%;" alt="Qwen3-14B Training Score Comparison">
-  <img src="figures/step_time_comparison.png" style="width: 50%;" alt="Qwen3-14B Step Time Comparison">
+  <a class="zoomable-image" href="figures/pass_rate_comparison.png" style="width: 50%;"><img src="figures/pass_rate_comparison.png" alt="Qwen3-14B Training Score Comparison"></a>
+  <a class="zoomable-image" href="figures/step_time_comparison.png" style="width: 50%;"><img src="figures/step_time_comparison.png" alt="Qwen3-14B Step Time Comparison"></a>
 </div>
 <div style="display: flex; gap: 16px;">
-  <img src="figures/pass_rate_comparison_qwen32b.png" style="width: 50%;" alt="Qwen3-32B Training Score Comparison">
-  <img src="figures/step_time_comparison_qwen32b.png" style="width: 50%;" alt="Qwen3-32B Step Time Comparison">
+  <a class="zoomable-image" href="figures/pass_rate_comparison_qwen32b.png" style="width: 50%;"><img src="figures/pass_rate_comparison_qwen32b.png" alt="Qwen3-32B Training Score Comparison"></a>
+  <a class="zoomable-image" href="figures/step_time_comparison_qwen32b.png" style="width: 50%;"><img src="figures/step_time_comparison_qwen32b.png" alt="Qwen3-32B Step Time Comparison"></a>
 </div>
 
 <p><em>Figure 3. Top row: Qwen3-14B. Left: training rollout pass rate on no-prefix tasks over steps. The horizontal line marks the baseline's convergence score; PS matches it 1.55x faster and keeps improving. Right: average wall-clock time per training step (<code>1398s</code> vs <code>1601s</code>). Bottom row: Qwen3-32B. Left: training score comparison; PS reaches the baseline-equivalent score at step <code>282</code> vs <code>395</code>. Right: average wall-clock time per training step (<code>2150s</code> vs <code>2358s</code>).</em></p>
@@ -284,20 +284,20 @@ target_step = total_steps - remaining
 <p>The per-step speedup comes from the same mechanism. Prefix replay restores the environment from an intermediate state and reuses an existing trajectory prefix, so that portion of the rollout no longer needs fresh LLM generation. Those replayed prefix steps are mostly deterministic environment transitions rather than new decoding work, and the generation savings are large enough to outweigh the queueing and bookkeeping overhead introduced by Prefix Sampling.</p>
 <h3>Higher Quality and Quantity Training Samples</h3>
 <div style="display: flex; gap: 16px; margin-bottom: 12px;">
-  <img src="figures/rerollout_pass_rate.png" style="width: 50%;" alt="Qwen3-14B Prefix Task Pass Rate">
-  <img src="figures/valid_samples_comparison.png" style="width: 50%;" alt="Qwen3-14B Valid Samples Comparison">
+  <a class="zoomable-image" href="figures/rerollout_pass_rate.png" style="width: 50%;"><img src="figures/rerollout_pass_rate.png" alt="Qwen3-14B Prefix Task Pass Rate"></a>
+  <a class="zoomable-image" href="figures/valid_samples_comparison.png" style="width: 50%;"><img src="figures/valid_samples_comparison.png" alt="Qwen3-14B Valid Samples Comparison"></a>
 </div>
 <div style="display: flex; gap: 16px;">
-  <img src="figures/rerollout_pass_rate_qwen32b.png" style="width: 50%;" alt="Qwen3-32B Prefix Task Pass Rate">
-  <img src="figures/valid_samples_comparison_qwen32b.png" style="width: 50%;" alt="Qwen3-32B Valid Samples Comparison">
+  <a class="zoomable-image" href="figures/rerollout_pass_rate_qwen32b.png" style="width: 50%;"><img src="figures/rerollout_pass_rate_qwen32b.png" alt="Qwen3-32B Prefix Task Pass Rate"></a>
+  <a class="zoomable-image" href="figures/valid_samples_comparison_qwen32b.png" style="width: 50%;"><img src="figures/valid_samples_comparison_qwen32b.png" alt="Qwen3-32B Valid Samples Comparison"></a>
 </div>
 
 <p><em>Figure 4. Top row: Qwen3-14B. Left: rollout pass rate on prefix tasks only (target: <code>0.5</code>), with mean <code>0.529</code> and std <code>0.078</code>. Right: number of valid training tasks per batch (<code>solve_partial</code>), increasing from <code>25.9</code> to <code>36.5</code>. Bottom row: Qwen3-32B. Left: prefix-task rollout pass rate under adaptive prefix control, staying near the <code>0.5</code> target. Right: valid training tasks per batch, increasing from <code>30.8</code> to <code>39.0</code>.</em></p>
 <p>The efficiency gains come from converting weak, skewed training signal into balanced, information-rich signal. On Qwen3-14B, prefix-task rollout pass rate stays near the 0.5 target throughout training, and PS increases the number of valid training tasks per batch from <strong>25.9</strong> to <strong>36.5</strong>, a <strong>41% increase</strong>. On Qwen3-32B, the same mechanism holds under adaptive prefix control: prefix-task rollout pass rate remains centered near <strong>0.5</strong>, while valid training tasks per batch increase from <strong>30.8</strong> to <strong>39.0</strong>, or <strong>1.27x more</strong> useful tasks per step. In both cases, PS improves both the quantity and the information density of the training data.</p>
 <h3>Higher Entropy, Better Exploration</h3>
 <div style="display: flex; gap: 16px; align-items: flex-start;">
-  <img src="figures/entropy_comparison.png" style="width: 50%;" alt="Qwen3-14B Entropy Comparison">
-  <img src="figures/entropy_comparison_qwen32b.png" style="width: 50%;" alt="Qwen3-32B Entropy Comparison">
+  <a class="zoomable-image" href="figures/entropy_comparison.png" style="width: 50%;"><img src="figures/entropy_comparison.png" alt="Qwen3-14B Entropy Comparison"></a>
+  <a class="zoomable-image" href="figures/entropy_comparison_qwen32b.png" style="width: 50%;"><img src="figures/entropy_comparison_qwen32b.png" alt="Qwen3-32B Entropy Comparison"></a>
 </div>
 
 <p><em>Figure 5. Left: Qwen3-14B output entropy over training steps; PS maintains higher entropy than the baseline before convergence, with convergence markers at steps <code>201</code> and <code>312</code>. Right: Qwen3-32B output entropy over training steps; PS again maintains higher pre-convergence entropy, with convergence markers at steps <code>282</code> and <code>395</code>.</em></p>
@@ -457,11 +457,14 @@ So the training target is not just “nonzero rollout pass rate,” but “maxim
       const modal = document.getElementById('image-modal');
       const modalImage = document.getElementById('image-modal-img');
       const closeButton = document.getElementById('image-modal-close');
-      const articleImages = document.querySelectorAll('.article img');
+      const zoomableImages = document.querySelectorAll('.zoomable-image');
 
-      articleImages.forEach((image) => {
-        image.addEventListener('click', () => {
-          modalImage.src = image.src;
+      zoomableImages.forEach((link) => {
+        link.addEventListener('click', (event) => {
+          event.preventDefault();
+          const image = link.querySelector('img');
+          const fullImageUrl = link.getAttribute('href') || image.src;
+          modalImage.src = fullImageUrl;
           modalImage.alt = image.alt || 'Enlarged image';
           modal.style.display = 'block';
         });
