@@ -491,31 +491,38 @@ d²[p(1-p)]/dp² = -2 &lt; 0  (confirmed maximum)
         const groups = [];
         let currentH2 = null;
         let currentH3Block = null;
+        let h2Index = 0;
+        let h3Index = 0;
 
         headings.forEach((heading, index) => {
           ensureId(heading, index);
           const level = heading.tagName.toLowerCase();
 
           if (level === 'h2') {
-            currentH2 = { heading, children: [] };
+            h2Index += 1;
+            h3Index = 0;
+            currentH2 = { heading, number: `${h2Index}.`, children: [] };
             groups.push(currentH2);
             currentH3Block = null;
             return;
           }
 
           if (!currentH2) {
-            currentH2 = { heading, children: [] };
+            h2Index += 1;
+            currentH2 = { heading, number: `${h2Index}.`, children: [] };
             groups.push(currentH2);
           }
 
           if (level === 'h3') {
-            currentH3Block = { heading, children: [] };
+            h3Index += 1;
+            currentH3Block = { heading, number: `${h2Index}.${h3Index}`, children: [] };
             currentH2.children.push(currentH3Block);
             return;
           }
 
           if (!currentH3Block) {
-            currentH3Block = { heading: null, children: [] };
+            h3Index += 1;
+            currentH3Block = { heading: null, number: `${h2Index}.${h3Index}`, children: [] };
             currentH2.children.push(currentH3Block);
           }
           currentH3Block.children.push(heading);
@@ -532,10 +539,10 @@ d²[p(1-p)]/dp² = -2 &lt; 0  (confirmed maximum)
 
         const splitIndex = Math.ceil(groups.length / 2);
 
-        const buildLink = (heading, style) => {
+        const buildLink = (heading, style, prefix = '') => {
           const link = document.createElement('a');
           link.href = `#${heading.id}`;
-          link.textContent = heading.textContent;
+          link.textContent = `${prefix}${heading.textContent}`;
           link.style.cssText = style;
           return link;
         };
@@ -546,7 +553,7 @@ d²[p(1-p)]/dp² = -2 &lt; 0  (confirmed maximum)
           block.style.cssText = 'margin-bottom: 0.8rem;';
 
           const strong = document.createElement('strong');
-          strong.appendChild(buildLink(group.heading, 'color: var(--text-primary); text-decoration: none;'));
+          strong.appendChild(buildLink(group.heading, 'color: var(--text-primary); text-decoration: underline;', `${group.number} `));
           block.appendChild(strong);
 
           if (group.children.length > 0) {
@@ -555,7 +562,7 @@ d²[p(1-p)]/dp² = -2 &lt; 0  (confirmed maximum)
 
             group.children.forEach((child) => {
               if (child.heading) {
-                childWrap.appendChild(buildLink(child.heading, 'color: inherit; text-decoration: none;'));
+                childWrap.appendChild(buildLink(child.heading, 'color: inherit; text-decoration: none;', `${child.number} `));
                 childWrap.appendChild(document.createElement('br'));
               }
 
