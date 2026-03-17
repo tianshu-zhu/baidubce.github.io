@@ -1180,7 +1180,7 @@ html {
 .article table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
 .article th, .article td { border: 1px solid #d9d9d9; padding: .65rem .8rem; }
 .zoomable-image { display: inline-block; cursor: zoom-in; }
-.zoomable-image img { max-width: 100%; height: auto; display: block; }
+.zoomable-image img { width: 100%; max-width: 100%; height: auto; display: block; }
 .article img { max-width: 100%; height: auto; cursor: zoom-in; }
 .article .hero-note { color: var(--text-secondary); margin-bottom: 1.5rem; }
 .article .back-link { margin-bottom: 1.5rem; display: inline-block; color: #0056d6; text-decoration: none; }
