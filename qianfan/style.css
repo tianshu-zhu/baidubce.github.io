@@ -1131,7 +1131,7 @@ html {
 }
 .research-row {
   display: flex !important;
-  align-items: flex-start;
+  align-items: baseline;
   gap: 2.5rem;
   padding: 2rem 0;
   border-bottom: 1px solid #e5e7eb;
