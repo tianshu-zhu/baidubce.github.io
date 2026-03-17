@@ -1170,6 +1170,11 @@ html {
   padding-bottom: 0;
 }
 .toc-inline-card h2::after { display: none; }
+.toc-inline-card {
+  background: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 8px;
+}
 .article { background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 2rem; }
 .article h1 { font-size: 2rem; margin-bottom: 1rem; }
 .article h2 { font-size: 1.6rem; margin-top: 2rem; margin-bottom: 1rem; }
