@@ -1125,7 +1125,7 @@ html {
 .index-table a { color: #0056d6; text-decoration: none; }
 .index-table a:hover { text-decoration: underline; }
 .research-feed {
-  max-width: 900px;
+  max-width: 760px;
   margin: 0 auto;
   background: transparent;
 }
