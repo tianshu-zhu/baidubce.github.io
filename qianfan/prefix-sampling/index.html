@@ -549,7 +549,7 @@ So the training target is not just “nonzero rollout pass rate,” but “maxim
           block.style.cssText = 'margin-bottom: 0.8rem;';
 
           const strong = document.createElement('strong');
-          strong.appendChild(buildLink(group.heading, 'color: var(--text-primary); text-decoration: underline;', `${group.number} `));
+          strong.appendChild(buildLink(group.heading, 'color: var(--text-primary);', `${group.number} `));
           block.appendChild(strong);
 
           if (group.children.length > 0) {
