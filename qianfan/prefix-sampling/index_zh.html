@@ -38,7 +38,7 @@
 当模型几乎总是失败，或者几乎总是成功时，梯度信号都会变得很弱，而且带有明显偏置。<strong>50% 的 rollout pass rate 可以最大化梯度信号</strong>，这正是我们要追求的目标。</p>
 <p><strong>Prefix Sampling（PS）是把 rollout pass rate 拉向 50% 的一种直接方法：</strong> 它通过重放 trajectory prefix，把每个任务的有效 rollout pass rate 推向 50%，也就是 binary-reward RL 在信息论意义上的最优点。对于大多数 rollout 都失败的任务，PS 会从一条罕见的成功轨迹中给模型一个 head start；对于大多数 rollout 都成功的任务，PS 会从一条罕见的失败轨迹中给模型一个 handicap。两种情况下，本来带偏的低质量信号都会被转化为更平衡、信息量更高的训练信号。</p>
 <p>在 Qwen3-14B（SWE-bench, R2E_Gym）上，基于 3 次实验取平均，PS 在达到相同 SWE-bench Verified pass@1 分数时，端到端速度提升约 <strong>2.07x</strong>（1.80x 更少训练步数 × 1.15x 更快单步速度），并且最终的 pass@1 分数也更高：<strong>0.298</strong> 对比 baseline 的 <strong>0.273</strong>。也就是说，它不仅更快，而且最终效果也更好。</p>
-<p>在 Qwen3-32B（SWE-bench, R2E_Gym）上，基于 3 次实验取平均，PS 在达到相同 SWE-bench Verified pass@1 分数时，端到端速度提升约 <strong>1.54x</strong>（<strong>1.40x</strong> 更少训练步数 × <strong>1.10x</strong> 更快单步速度），并且<strong>不牺牲最终性能</strong>。</p>
+<p>在 Qwen3-32B（SWE-bench, R2E_Gym）上，基于 3 次实验取平均，PS 在达到相同 SWE-bench Verified pass@1 分数时，端到端速度提升约 <strong>1.54x</strong>（1.40x 更少训练步数 × 1.10x 更快单步速度），并且<strong>不牺牲最终性能</strong>。</p>
 <h2>大多数 RL 任务的 Rollout Pass Rate 都不对</h2>
 <p>在我们的 SWE-bench RL 训练设置中（Qwen3-14B、每个任务 <code>N=8</code> 个 rollouts、<code>batch_size=64</code>），任务大致会落在几类学习效率完全不同的区间里：</p>
 <ul>
